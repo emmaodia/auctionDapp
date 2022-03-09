@@ -1,4 +1,8 @@
 require("@nomiclabs/hardhat-waffle");
+require('dotenv').config()
+
+const ALCHEMY_KEY = process.env.ALCHEMY_KEY;
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -18,4 +22,13 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  */
 module.exports = {
   solidity: "0.8.4",
+  networks: {
+    ropsten: {
+      url: `https://eth-ropsten.alchemyapi.io/v2/${ALCHEMY_KEY}`,
+      accounts: [`${PRIVATE_KEY}`],
+      gas: 2100000,
+      gasPrice: 8000000000,
+      saveDeployments: true,
+    }
+  }
 };
