@@ -20,21 +20,8 @@ import Typography from '@mui/material/Typography';
 
 
 
-const connect = async () => {
 
-  // const [address, setAddress] = useState();
-  
-  try {
-    
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const signer = provider.getSigner();
-    const add = await signer.getAddress();
-    // setAddress(add)
-    console.log(add)
-  } catch (error) {
-    console.log(error);
-  }
-};
+
 
 
 const ALCHEMY_KEY = "EMc9byzgpkom4AA8HhtqS_SI4gP2TEAf" // process.env.ALCHEMY_KEY;
@@ -76,6 +63,22 @@ async function main() {
 main();
 
 function App() {
+
+  const [address, setAddress] = useState();
+  const connect = async () => {
+
+    
+    try {
+      
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const signer = provider.getSigner();
+      const add = await signer.getAddress();
+      setAddress(add)
+      console.log(add)
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Card sx={{ minWidth: 275 }}>
@@ -87,7 +90,7 @@ function App() {
           be{bull}nev{bull}o{bull}lent
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
+          adjective {address}
         </Typography>
         <Typography variant="body2">
           well meaning and kindly.
