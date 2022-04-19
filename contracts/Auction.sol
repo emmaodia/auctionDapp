@@ -8,6 +8,10 @@ contract Auction {
     address public highestBidder;
     uint public highestBid;
 
+    uint biddingTime;
+    address public owner;
+    uint public bidItem;
+
     mapping(address => uint) public pendingReturns;
 
     bool ended;
@@ -21,12 +25,21 @@ contract Auction {
     error AuctionNotYetEnded();
     error AuctionEndAlreadyCalled();
 
-    constructor(
-        uint biddingTime,
-        address payable beneficiaryAddress
-    ){
-        beneficiary = beneficiaryAddress;
+    constructor(){
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner() {
+        require(owner == msg.sender, "Only the Contract Owner can call this function");
+        _;
+    }
+
+    function auction(uint _item, uint _biddingTime, address payable _beneficiaryAddress) public onlyOwner returns(bool success) {
+        bidItem = _item;
+        biddingTime = _biddingTime;
+        beneficiary = _beneficiaryAddress;
         auctionEndTime = block.timestamp + biddingTime;
+        return success;
     }
 
     function bid() external payable{
