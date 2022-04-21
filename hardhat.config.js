@@ -23,8 +23,8 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 module.exports = {
   solidity: "0.8.4",
   networks: {
-    ropsten: {
-      url: `https://eth-ropsten.alchemyapi.io/v2/${ALCHEMY_KEY}`,
+    kovan: {
+      url: `https://eth-kovan.alchemyapi.io/v2/${ALCHEMY_KEY}`,
       accounts: [`${PRIVATE_KEY}`],
       gas: 2100000,
       gasPrice: 8000000000,
