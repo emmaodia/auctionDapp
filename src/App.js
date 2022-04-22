@@ -18,13 +18,13 @@ import { Grid } from '@mui/material';
 
 const ALCHEMY_KEY = "EMc9byzgpkom4AA8HhtqS_SI4gP2TEAf" // process.env.ALCHEMY_KEY;
 const PRIVATE_KEY = "8e4f5d7e40dccfec06a809103e9611197cf30a8349607b33be3ffc0c77740257" // process.env.PRIVATE_KEY;
-const CONTRACT_ADDRESS = "0x43028d82134457Ad49Ca0f3af3cE9f1DB5e6B89A";
+const CONTRACT_ADDRESS = "0x7801d0d11B03A6ed31Cee4fC5D44c090c2D52d88";
 
 console.log("Here");
 
 const Contract = require("./Auction.sol/Auction.json")
 
-const provider = new ethers.providers.AlchemyProvider("ropsten", ALCHEMY_KEY)
+const provider = new ethers.providers.AlchemyProvider("kovan", ALCHEMY_KEY)
 const signer = new ethers.Wallet(PRIVATE_KEY, provider)
 const auction = new ethers.Contract(CONTRACT_ADDRESS, Contract.abi, signer)
 
@@ -45,6 +45,8 @@ function App() {
 
   const [address, setAddress] = useState();
   const [connButtonText, setConnButtonText] = useState("Connect Wallet")
+  const [owner, setOwner] = useState("Owner")
+
   const connect = async () => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -57,6 +59,13 @@ function App() {
       console.log(error);
     }
   };
+
+  const callOwner = async() => {
+    let value = await auction.owner();
+
+    setOwner(value);
+
+  }
   return (
     <>
     <Grid class="App">
@@ -75,6 +84,9 @@ function App() {
       {address}
       </div>
     </Grid>
+    <Button size="small" 
+    onClick={callOwner}
+    >Owner: {owner}</Button>
     </>
   );
 }
