@@ -45,7 +45,8 @@ function App() {
 
   const [address, setAddress] = useState();
   const [connButtonText, setConnButtonText] = useState("Connect Wallet")
-  const [owner, setOwner] = useState("Owner")
+  const [owner, setOwner] = useState("Owner");
+  const [beneficiary, setBeneficiary] = useState("")
 
   const connect = async () => {
     try {
@@ -66,6 +67,14 @@ function App() {
     setOwner(value);
 
   }
+
+  const callBeneficiary = async() => {
+    let value = await auction.beneficiary();
+
+    setBeneficiary(value);
+
+  }
+
   return (
     <>
     <Grid class="App">
@@ -87,6 +96,10 @@ function App() {
     <Button size="small" 
     onClick={callOwner}
     >Owner: {owner}</Button>
+
+<Button size="small" 
+    onClick={callBeneficiary}
+    >Owner: {beneficiary}</Button>
     </>
   );
 }
