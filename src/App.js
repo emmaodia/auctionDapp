@@ -99,7 +99,7 @@ function App() {
 
 <Button size="small" 
     onClick={callBeneficiary}
-    >Owner: {beneficiary}</Button>
+    >Beneficiary: {beneficiary}</Button>
     </>
   );
 }
