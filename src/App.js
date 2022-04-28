@@ -16,8 +16,8 @@ import { Grid } from '@mui/material';
 
 // dotenv.config({ path: path.join(__dirname, '../.env') });
 
-const ALCHEMY_KEY = "EMc9byzgpkom4AA8HhtqS_SI4gP2TEAf" // process.env.ALCHEMY_KEY;
-const PRIVATE_KEY = "8e4f5d7e40dccfec06a809103e9611197cf30a8349607b33be3ffc0c77740257" // process.env.PRIVATE_KEY;
+const ALCHEMY_KEY = process.env.REACT_APP_ALCHEMY_KEY;
+const PRIVATE_KEY = process.env.REACT_APP_PRIVATE_KEY;
 const CONTRACT_ADDRESS = "0x7801d0d11B03A6ed31Cee4fC5D44c090c2D52d88";
 
 console.log("Here");
