@@ -42,8 +42,14 @@ function App() {
   const [address, setAddress] = useState();
   
   const [connButtonText, setConnButtonText] = useState("Connect Wallet")
+  
   const [owner, setOwner] = useState("Owner");
   const [beneficiary, setBeneficiary] = useState("")
+  const [auctionEndTime, setAuctionEndTime] = useState("Auction will end in...")
+  const [highestBid, setHighestBid] = useState("Highest Bid")
+  const [bidItem, setBidItem] = useState("Bid Item")
+  const [highestBidder, setHighestBidder] = useState("Highest Bidder")
+  const [pendingReturns, setPendingReturns] = useState("...")
 
   const contract = async () => {
     try {
@@ -72,6 +78,36 @@ function App() {
 
   }
 
+  const callAuctionEndTime = async() => {
+    let value = await auction.auctionEndTIme()
+
+    setAuctionEndTime(value);
+  }
+
+  const callHighestBid = async() => {
+    let value = await auction.highestBid()
+
+    setHighestBid(value);
+  }
+
+  const callBidItem = async() => {
+    let value = await auction.bidItem()
+
+    setBidItem(value);
+  }
+
+  const callHighestBidder = async() => {
+    let value = await auction.highestBidder()
+
+    setHighestBidder(value);
+  }
+
+  const callPendingReturns = async() => {
+    let value = await auction.pendingReturns()
+
+    setPendingReturns(value);
+  }
+
   return (
     <>
     <Grid class="App">
@@ -80,11 +116,12 @@ function App() {
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography variant="h5" component="div">
-            Item Name
+            Item Name: {bidItem}
           </Typography>
           <Typography variant="body2">
-            Highest Bid | Auction End 
+            {highestBid} | {auctionEndTime} 
           </Typography>
+          {highestBidder}
         </CardContent>
         <Button size="small" onClick={contract}>{connButtonText}</Button>
       </Card>
