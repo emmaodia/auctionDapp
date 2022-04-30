@@ -7,16 +7,10 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import detectEthereumProvider from '@metamask/detect-provider';
-
 import './App.css';
 import { Grid } from '@mui/material';
-// // import {Contract}  from 'abi';
 
-// require('dotenv').config()
-// import dotenv from 'dotenv';
-
-// dotenv.config({ path: path.join(__dirname, '../.env') });
+import ConnectWallet from './Components/ConnectWallet';
 
 const ALCHEMY_KEY = process.env.REACT_APP_ALCHEMY_KEY;
 const PRIVATE_KEY = process.env.REACT_APP_PRIVATE_KEY;
@@ -51,35 +45,6 @@ function App() {
   const [owner, setOwner] = useState("Owner");
   const [beneficiary, setBeneficiary] = useState("")
 
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [defaultAccount, setDefaultAccount] = useState(null);
-  const [provider, setProvider] = useState(null);
-
-
-  const connectWalletHandler = () => {
-		if (window.ethereum && defaultAccount == null) {
-			// set ethers provider
-			setProvider(new ethers.providers.Web3Provider(window.ethereum));
-      const signer = provider.getSigner();
-      const add = signer.getAddress();
-      setAddress(add)
-			// connect to metamask
-			window.ethereum.request({ method: 'eth_requestAccounts'})
-			.then(result => {
-				setConnButtonText('Wallet Connected');
-				setDefaultAccount(result[0]);
-			})
-			.catch(error => {
-				setErrorMessage(error.message);
-			});
-
-		} else if (!window.ethereum){
-			console.log('Need to install MetaMask');
-			setErrorMessage('Please install MetaMask browser extension to interact');
-		}
-	}
-
-
   const contract = async () => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -111,8 +76,7 @@ function App() {
     <>
     <Grid class="App">
       <div class="container">
-      <Button size="small" variant="outlined" onClick={connectWalletHandler}>{connButtonText}</Button>
-      <div>{errorMessage}</div>
+      <ConnectWallet />
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography variant="h5" component="div">
