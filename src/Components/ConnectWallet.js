@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import Button from '@mui/material/Button';
 
@@ -36,6 +36,10 @@ function ConnectWallet() {
     }
 
     window.ethereum.on('accountsChanged', walletAccountChanged);
+
+    useEffect(() => {
+        wallectConnection()
+    }, [defaultAccount])
     
     return (
         <div>
