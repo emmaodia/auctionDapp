@@ -108,6 +108,11 @@ function App() {
     setPendingReturns(value);
   }
 
+  const writeAuction = (e, _item, _biddingTime, _beneficiaryAddress) => {
+    e.preventDefault();
+    auction.auction(_item, _biddingTime, _beneficiaryAddress);
+  }
+
   return (
     <>
     <Grid class="App">
