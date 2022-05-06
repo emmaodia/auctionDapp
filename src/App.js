@@ -113,6 +113,10 @@ function App() {
     auction.auction(_item, _biddingTime, _beneficiaryAddress);
   }
 
+  const writeAuctionEnd = () => {
+    auction.auctionEnd()
+  }
+
   return (
     <>
     <Grid class="App">
@@ -140,6 +144,10 @@ function App() {
 <Button size="small" 
     onClick={callBeneficiary}
     >Beneficiary: {beneficiary}</Button>
+
+<Button size="small" 
+    onClick={writeAuctionEnd}
+    >Auction End</Button>
     </>
   );
 }
