@@ -117,6 +117,11 @@ function App() {
     auction.auctionEnd()
   }
 
+  const writeBid = (e, _amount, ) => {
+    e.preventDefault();
+    auction.bid(_amount);
+  }
+
   return (
     <>
     <Grid class="App">
