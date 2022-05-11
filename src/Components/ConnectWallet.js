@@ -42,10 +42,12 @@ function ConnectWallet() {
     }, [defaultAccount])
     
     return (
-        <div>
-        <Button size="small" variant="outlined" onClick={wallectConnection}>{connButtonText}</Button>
-        <div>{errorMessage}{defaultAccount}</div>
-        </div>
+        <div style={{display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "flex-end"}}>
+            <div>
+                <Button size="small" variant="outlined" onClick={wallectConnection}>{connButtonText}</Button>
+            </div>
+            <div style={{paddingTop: "1%", paddingBottom: "1%"}}>{errorMessage}{defaultAccount}</div>
+         </div>
     )
 }
 
