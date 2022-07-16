@@ -7,6 +7,9 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+
 import './App.css';
 import { Grid } from '@mui/material';
 
@@ -51,18 +54,18 @@ function App() {
   const [highestBidder, setHighestBidder] = useState("Highest Bidder")
   const [pendingReturns, setPendingReturns] = useState("...")
 
-  const contract = async () => {
-    try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const signer = provider.getSigner();
-      const add = await signer.getAddress();
-      setAddress(add)
-      setConnButtonText("BID")
-      console.log(add)
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const contract = async () => {
+  //   try {
+  //     const provider = new ethers.providers.Web3Provider(window.ethereum)
+  //     const signer = provider.getSigner();
+  //     const add = await signer.getAddress();
+  //     setAddress(add)
+  //     setConnButtonText("BID")
+  //     console.log(add)
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const callOwner = async() => {
     let value = await auction.owner();
@@ -70,6 +73,8 @@ function App() {
     setOwner(value);
 
   }
+
+  callOwner();
 
   const callBeneficiary = async() => {
     let value = await auction.beneficiary();
@@ -123,37 +128,120 @@ function App() {
   }
 
   return (
-    <>
-    <Grid class="App">
-      <div class="container">
-      <ConnectWallet />
-      <Card sx={{ minWidth: 275 }}>
-        <CardContent>
-          <Typography variant="h5" component="div">
-            Item Name: {bidItem}
-          </Typography>
-          <Typography variant="body2">
-            {highestBid} | {auctionEndTime} 
-          </Typography>
-          {highestBidder}
-        </CardContent>
-        <Button size="small" onClick={contract}>{connButtonText}</Button>
-      </Card>
-      {address}
+    <div className='container'>
+      <div>
+        <ConnectWallet />
       </div>
-    </Grid>
-    <Button size="small" 
-    onClick={callOwner}
-    >Owner: {owner}</Button>
 
-<Button size="small" 
-    onClick={callBeneficiary}
-    >Beneficiary: {beneficiary}</Button>
+      <div className='cards'>
 
-<Button size="small" 
-    onClick={writeAuctionEnd}
-    >Auction End</Button>
-    </>
+        <div className='items'>
+          <div className='card-item'>
+          <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  Item Name: {bidItem}
+                </Typography>
+                <Typography variant="body2">
+                  {highestBid} | {auctionEndTime} 
+                </Typography>
+                {highestBidder}
+
+                <p>Owner: {owner}</p>
+              </CardContent>
+            </Card>
+          </div>
+          <div className='card-item'>
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  Item Name: {bidItem}
+                </Typography>
+                <Typography variant="body2">
+                  {highestBid} | {auctionEndTime} 
+                </Typography>
+                {highestBidder}
+
+                <p>Owner: {owner}</p>
+              </CardContent>
+            </Card>
+            </div>
+            <div className='card-item'>
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  Item Name: {bidItem}
+                </Typography>
+                <Typography variant="body2">
+                  {highestBid} | {auctionEndTime} 
+                </Typography>
+                {highestBidder}
+
+                <p>Owner: {owner}</p>
+              </CardContent>
+            </Card>
+            </div>
+            <div className='card-item'>
+         <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  Item Name: {bidItem}
+                </Typography>
+                <Typography variant="body2">
+                  {highestBid} | {auctionEndTime} 
+                </Typography>
+                {highestBidder}
+
+                <p>Owner: {owner}</p>
+              </CardContent>
+            </Card>
+            </div>
+            <div className='card-item'>
+             <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  Item Name: {bidItem}
+                </Typography>
+                <Typography variant="body2">
+                  {highestBid} | {auctionEndTime} 
+                </Typography>
+                {highestBidder}
+
+                <p>Owner: {owner}</p>
+              </CardContent>
+            </Card>
+            </div>
+            <div className='card-item'>
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  Item Name: {bidItem}
+                </Typography>
+                <Typography variant="body2">
+                  {highestBid} | {auctionEndTime} 
+                </Typography>
+                {highestBidder}
+
+                <p>Owner: {owner}</p>
+              </CardContent>
+            </Card>
+            </div>
+        </div>
+            
+        
+          <Button size="small" 
+          onClick={callOwner}
+          >Owner: {owner}</Button>
+
+      <Button size="small" 
+          onClick={callBeneficiary}
+          >Beneficiary: {beneficiary}</Button>
+
+      <Button size="small" 
+          onClick={writeAuctionEnd}
+          >Auction End</Button>
+      </div>
+    </div>
   );
 }
 
