@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.4;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract Auction {
+contract Auction is Ownable {
+    using Counters for Counters.Counter;
+
     address payable public beneficiary;
     uint public auctionEndTime;
 
@@ -43,13 +46,13 @@ contract Auction {
         owner = msg.sender;
     }
 
-    modifier onlyOwner() {
-        require(
-            owner == msg.sender,
-            "Only the Contract Owner can call this function"
-        );
-        _;
-    }
+    // modifier onlyOwner() {
+    //     require(
+    //         owner == msg.sender,
+    //         "Only the Contract Owner can call this function"
+    //     );
+    //     _;
+    // }
 
     function auction(
         uint _item,
