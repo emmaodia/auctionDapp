@@ -19,7 +19,7 @@ contract Auction is Ownable {
 
     Counters.Counter private _bidItemId;
 
-    mapping(uint256 => BidItem) private bidItems;
+    mapping(uint256 => BidItem) private bidItemIdToBidItems;
 
     struct BidItem {
         uint256 bidItemId;
@@ -55,11 +55,23 @@ contract Auction is Ownable {
     // }
 
     function auction(
-        uint _item,
+        uint _price,
         uint _biddingTime,
         address payable _beneficiaryAddress
-    ) public onlyOwner returns (bool success) {
-        bidItem = _item;
+    ) public returns (bool success) {
+
+        _bidItemId.increment();
+
+        uint256 bidItemId = _bidItemId.current();
+
+        bidItemIdToBidItems[bidItemId] = BidItem({
+            bidItemId,
+            msg.sender,
+            _price,
+            false,
+            false
+        });
+        // bidItem = _item;
         biddingTime = _biddingTime;
         beneficiary = _beneficiaryAddress;
         auctionEndTime = block.timestamp + biddingTime;
