@@ -59,18 +59,17 @@ contract Auction is Ownable {
         uint _biddingTime,
         address payable _beneficiaryAddress
     ) public returns (bool success) {
-
         _bidItemId.increment();
 
         uint256 bidItemId = _bidItemId.current();
 
-        bidItemIdToBidItems[bidItemId] = BidItem({
+        bidItemIdToBidItems[bidItemId] = BidItem(
             bidItemId,
-            msg.sender,
+            _beneficiaryAddress,
             _price,
             false,
             false
-        });
+        );
         // bidItem = _item;
         biddingTime = _biddingTime;
         beneficiary = _beneficiaryAddress;
