@@ -7,13 +7,6 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract Auction is Ownable {
     using Counters for Counters.Counter;
 
-    address payable public beneficiary;
-    uint public auctionEndTime;
-
-    address public highestBidder;
-    uint public highestBid;
-
-    uint biddingTime;
     address public owner;
     // uint public bidItem;
 
@@ -22,11 +15,15 @@ contract Auction is Ownable {
     mapping(uint256 => BidItem) private bidItemIdToBidItems;
 
     struct BidItem {
-        uint256 bidItemId;
-        address payable owner;
-        uint256 price;
         bool sold;
         bool canceled;
+        uint256 bidItemId;
+        uint128 startingPrice;
+        uint256 maxBid;
+        address payable owner;
+        address bidWinner;
+        uint256[] bidAmounts;
+        address[] users;
     }
 
     mapping(address => uint) public pendingReturns;
